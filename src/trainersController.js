@@ -1,4 +1,4 @@
-const {pokemonMiddleware, trainerMiddleware} = require("./middlewares")
+const { pokemonMiddleware, trainerMiddleware } = require("./middlewares")
 
 const trainers = require("./state").trainers
 
@@ -11,7 +11,11 @@ router.get("/", getAllTrainers)
 router.get("/:trainerNameOrId", trainerMiddleware, getTrainerByName)
 
 // With 3 arguments, it means | PATH | MIDDLEWARE (or array of middleware) | HANDLER
-router.post("/:trainerNameOrId/pokemon/:pokemonNameOrId/capture", pokemonMiddleware, capturePokemon)
+router.post(
+    "/:trainerNameOrId/pokemon/:pokemonNameOrId/capture",
+    pokemonMiddleware,
+    capturePokemon
+)
 
 function getAllTrainers(req, res) {
     res.json(trainers)
