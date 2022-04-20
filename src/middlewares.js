@@ -1,4 +1,5 @@
 const { pokemon, trainers } = require("./state")
+const { users } = require("./Users")
 
 function pokemonMiddleware(req, res, next) {
     const pokemonNameOrId = req.params.pokemonNameOrId
@@ -51,8 +52,33 @@ function trainerMiddleware(req, res, next) {
     res.locals.trainer = foundTrainer
     next()
 }
+function userMiddleware(req, res, next) {
+    const userNameOrId = req.params.userNameOrId
 
+    const num = Number(userNameOrId)
+
+    let foundUser
+    if (num) {
+        foundUser = users.find(function (el) {
+            return el.id === num
+        })
+    } else {
+        const userName = userNameOrId
+        foundUser = users.find(function (el) {
+            return el.name.toLowerCase() === userName.toLowerCase()
+        })
+    }
+
+    if (!foundUser) {
+        res.status(404).end()
+        return
+    }
+
+    res.locals.user = foundUser
+    next()
+}
 module.exports = {
     pokemonMiddleware,
     trainerMiddleware,
+    userMiddleware,
 }

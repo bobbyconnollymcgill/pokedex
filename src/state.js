@@ -23,6 +23,7 @@ const trainers = [
     },
 ]
 
+
 module.exports = {
     pokemon,
     trainers,

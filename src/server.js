@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 
 app.use("/pokemon", require("./pokemonController"))
 app.use("/trainers", require("./trainersController"))
-
+app.use("/users", require("./usersController"))
 app.listen(PORT, () => {
     console.log("listening on PORT " + PORT)
 })
